@@ -1,0 +1,4 @@
+// Copy this file to Config/LocalSigning.xcconfig and set your own Apple Team ID.
+// You can find your Team ID in Xcode -> Settings -> Accounts.
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+HYPERDISPLAY_BUNDLE_PREFIX = com.yourname.hyperdisplay

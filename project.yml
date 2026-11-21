@@ -1,0 +1,66 @@
+name: HyperDisplay
+options:
+  bundleIdPrefix: com.hyperdisplay
+  deploymentTarget:
+    macOS: "15.0"
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+
+configFiles:
+  Debug: Config/LocalSigning.xcconfig
+  Release: Config/LocalSigning.xcconfig
+
+settings:
+  base:
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.9"
+
+targets:
+  HyperDisplayMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: Shared
+      - path: HyperDisplayMac
+        excludes:
+          - Info.plist
+          - HyperDisplayMac.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(HYPERDISPLAY_BUNDLE_PREFIX).mac
+        INFOPLIST_FILE: HyperDisplayMac/Info.plist
+        CODE_SIGN_ENTITLEMENTS: HyperDisplayMac/HyperDisplayMac.entitlements
+        SWIFT_OBJC_BRIDGING_HEADER: HyperDisplayMac/HyperDisplayMac-Bridging-Header.h
+        ENABLE_HARDENED_RUNTIME: NO
+        COMBINE_HIDPI_IMAGES: YES
+        MACOSX_DEPLOYMENT_TARGET: "15.0"
+    dependencies:
+      - sdk: ScreenCaptureKit.framework
+      - sdk: VideoToolbox.framework
+      - sdk: CoreMedia.framework
+      - sdk: CoreVideo.framework
+      - sdk: CoreGraphics.framework
+      - sdk: AppKit.framework
+
+  HyperDisplayiPad:
+    type: application
+    platform: iOS
+    sources:
+      - path: Shared
+      - path: HyperDisplayiPad
+        excludes:
+          - Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(HYPERDISPLAY_BUNDLE_PREFIX).ipad
+        INFOPLIST_FILE: HyperDisplayiPad/Info.plist
+        TARGETED_DEVICE_FAMILY: "2"
+        SUPPORTS_MACCATALYST: NO
+        IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    dependencies:
+      - sdk: AVFoundation.framework
+      - sdk: VideoToolbox.framework
+      - sdk: CoreMedia.framework
+      - sdk: CoreVideo.framework
+      - sdk: QuartzCore.framework
+      - sdk: UIKit.framework

@@ -1,0 +1,18 @@
+# Build artifacts & Xcode user state
+build/
+DerivedData/
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+
+# Local signing credentials
+Config/LocalSigning.xcconfig
+
+# Compiled benchmark binaries & temp logs
+StressTest/HyperStress120
+*.ips
+*.log
+.DS_Store
+__pycache__/
